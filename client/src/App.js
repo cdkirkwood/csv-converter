@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import SingleRow from './SingleRow'
+import sortData from './sortData'
+import Table from './Table'
 
 class App extends Component {
 
@@ -7,70 +10,48 @@ class App extends Component {
     super(props)
     this.state = {
       csvTitles: [],
-      csvData: []
+      fullData: [],
+      lastSorted: '',
+      filterStr: '',
+      filteredData: []
     }
 
     this.sortColumn = this.sortColumn.bind(this)
-    this.sortData = this.sortData.bind(this)
-    //this.sortIntData = this.sortIntData.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
     //fetching csv json from server
     fetch('/api/csv')
       .then(res => res.json())
-      .then(data => this.setState({ csvTitles: data[0], csvData: data.slice(1, data.length - 1) }))
+      .then(data => this.setState({ csvTitles: data[0], fullData: data.slice(1, data.length - 1) }))
   }
 
   sortColumn(evt, index) {
-    const data = this.state.csvData
+    const data = this.state.fullData
     const title = this.state.csvTitles[index]
-    const isString = isNaN(data[0][index])
-    // const sortedData = isString ? this.sortData(data, index) : this.sortIntData(data, index)
-    const sortedData = this.sortData(data, index)
-    //const sortedKey = 'is' + title + 'Sorted'
-    //need to somehow keep track of if the column is already sorted
-    this.setState({csvData: sortedData})
+    const sortedData = sortData(data, index, title, this.state.lastSorted)
+    this.setState({ fullData: sortedData, lastSorted: title })
   }
 
-  sortData(data, index) {
-    return data.sort((a, b) => {
-      if (a[index] > b[index]) return 1
-      if (a[index] < b[index]) return -1
-      else return 0
+  handleChange(evt) {
+    const filterStr = evt.target.value
+    const filteredData = this.state.fullData.filter(row => {
+      return row.find(str => str.toLowerCase().includes(filterStr.toLowerCase()))
     })
+    this.setState({ filterStr, filteredData })
   }
-
-  // sortIntData(data) {
-  //   return data.sort((a, b) => a - b)
-  // }
 
   render() {
-    const titles = this.state.csvTitles
-    const data = this.state.csvData
-    return data.length ? (
-      <table>
-        <tbody>
-          <tr>
-            <th>Row</th>
-            {titles.map((column, colindex) => (
-              <th key={colindex}><button onClick={(evt => this.sortColumn(evt, colindex))}>{column}</button></th>
-            ))}
-          </tr>
-          {data.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                <td>{rowIndex + 1}</td>
-                {row.map((dataValue, innerIndx) => (
-                  <td key={innerIndx}>{dataValue}</td>
-                ))}
-              </tr>
-            )
-          )}
-        </tbody>
-      </table>
+    const {csvTitles, fullData, filterStr, filteredData} = this.state
+    return fullData.length ? (
+      <div>
+        <input type="text" name={filterStr} value={filterStr} onChange={this.handleChange} />
+        <Table titles={csvTitles} filterStr={filterStr} filteredData={filteredData} fullData={fullData} sortColumn={this.sortColumn} />
+      </div>
     )
       : <h3>...Loading</h3>
   }
 }
 
-export default App;
+export default App
