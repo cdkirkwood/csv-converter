@@ -1,0 +1,14 @@
+{
+  "name": "example-create-react-app-express",
+  "version": "1.0.0",
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "nodemon server --watch server",
+    "dev": "npm run server & npm run client"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "papaparse": "^4.5.0"
+  }
+}
