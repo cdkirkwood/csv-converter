@@ -9,6 +9,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "fs": "0.0.1-security",
-    "papaparse": "^4.5.0"
+    "papaparse": "^4.5.0",
+    "react-tooltip": "^3.6.1"
   }
 }

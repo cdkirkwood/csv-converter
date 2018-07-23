@@ -1,14 +1,27 @@
 import React from 'react'
+import ReactTooltip from 'react-tooltip'
 
+// const renderToolTip = index => (
+//   <ReactTooltip id="dataToolTip" type="dark" effect="solid">
+//   {index}
+// </ReactTooltip>
+// )
 const SingleRow = props => {
-  const {row, rowIndex} = props
+  const { data, startIndex } = props
   return (
-    <tr>
-      <td>{rowIndex + 1}</td>
-      {row.map((dataValue, innerIndx) => (
-        <td key={innerIndx}>{dataValue}</td>
-      ))}
-    </tr>
+    data.map((row, rowIndex) => {
+      return rowIndex >= startIndex && rowIndex < startIndex + 20 ?
+        <tr key={rowIndex}>
+          {row.map((dataValue, innerIndx) => (
+            <td data-tip data-for="dataToolTip" key={innerIndx}>
+              {dataValue}
+            </td>
+          ))}
+        </tr>
+        : null
+    }
+    )
+
   )
 }
 

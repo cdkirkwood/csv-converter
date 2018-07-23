@@ -1,7 +1,33 @@
+body {
+  background: linear-gradient(90deg, #FFEEEE, #DDEFBB);
+}
+
 table {
   border-collapse: collapse;
 }
 
 table, th, td {
   border: 1px solid black;
+}
+
+.table-stats-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+/* .table-input-container {
+  height: 100vh;
+  padding: 10px;
+} */
+
+#stats {
+  height: 100vh;
+  text-align: center;
 }

@@ -1,5 +1,5 @@
-const sortData = (data, index, title, lastSorted) => (
-  lastSorted === title ?
+const sortData = (data, index, lastSorted) => (
+  lastSorted === index ?
     data.reverse()
     : data.sort((a, b) => {
       if (a[index] > b[index]) return 1
