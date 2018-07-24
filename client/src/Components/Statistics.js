@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import calcTotal from './calcTotal'
-import calcMean from './calcMean'
-import calcRange from './calcRange'
+import calcTotal from '../HelperFunctions/calcTotal'
+import calcMean from '../HelperFunctions/calcMean'
+import calcRange from '../HelperFunctions/calcRange'
 
 export default class Stats extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ export default class Stats extends Component {
   }
 
   render() {
-    const { data, colIndex } = this.props
+    const { data } = this.props
     const { total, mean, range, valueOfColum } = this.state
     switch (valueOfColum) {
       case 'number':
