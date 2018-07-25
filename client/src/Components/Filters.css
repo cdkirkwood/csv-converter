@@ -1,0 +1,15 @@
+.str-filter {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1%;
+  width: 50%;
+}
+
+.int-filters {
+  display: flex;
+  flex-direction: row;
+  /* height: 20%; */
+  justify-content: space-around;
+  width: 50%;
+  align-items: center;
+}

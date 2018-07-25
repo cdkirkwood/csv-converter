@@ -1,13 +1,5 @@
 import React from 'react'
-import ReactTooltip from 'react-tooltip'
-
-const renderToolTip = (rowIndex, colIndex) => {
-  return (
-    <ReactTooltip id={`dataToolTip${rowIndex}`} type="dark" effect="solid">
-      {`Row: ${rowIndex + 1}`}
-    </ReactTooltip>
-  )
-}
+import CellToolTip from './CellToolTip'
 
 const SingleRow = props => {
   const { data, startIndex } = props
@@ -18,7 +10,7 @@ const SingleRow = props => {
           {row.map((dataValue, innerIndex) => (
             <td data-tip data-for={`dataToolTip${rowIndex}`} key={innerIndex}>
               {dataValue}
-              {renderToolTip(rowIndex, dataValue)}
+              <CellToolTip rowIndex={rowIndex} />
             </td>
           ))}
         </tr>

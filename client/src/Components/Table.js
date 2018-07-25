@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import SingleRow from './SingleRow'
 import TitleToolTip from './TitleToolTip'
 
 const Table = props => {
-  const { titles, isFiltered, filteredData, fullData, sortColumn, startIndex } = props
+  const { titles, isFiltered, filteredData, fullData, sortColumn, startIndex, sortType, selectedColIndex, appliedFilter } = props
   return (
     <div>
       <table>
@@ -14,7 +14,12 @@ const Table = props => {
                 <button onClick={(evt => sortColumn(evt, colIndex))}>
                   {column}
                 </button>
-                <TitleToolTip colIndex={colIndex} data={fullData} />
+                <TitleToolTip 
+                colIndex={colIndex} 
+                data={fullData} 
+                sortType={sortType} 
+                selectedColIndex={selectedColIndex} 
+                appliedFilter={appliedFilter} />
               </th>
             ))}
           </tr>

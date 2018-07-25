@@ -10,26 +10,27 @@ table, th, td {
   border: 1px solid black;
 }
 
-.table-stats-container {
+.container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   height: 100%;
+  margin-top: 1%;
 }
 
 .buttons {
   display: flex;
   justify-content: space-around;
   padding: 10px;
+  width: 90%;
 }
 
-/* .table-input-container {
+.stats {
   height: 100vh;
-  padding: 10px;
-} */
-
-#stats {
-  height: 100vh;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 50%;
 }

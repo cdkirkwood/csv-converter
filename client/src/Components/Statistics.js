@@ -29,6 +29,7 @@ export default class Stats extends Component {
     }
   }
 
+  //if user switches column, we want stats to change
   static getDerivedStateFromProps(nextProps, prevState) {
     return nextProps.colIndex !== prevState.colIndex ?
       { colIndex: nextProps.colIndex }
@@ -55,7 +56,7 @@ export default class Stats extends Component {
     switch (valueOfColum) {
       case 'number':
         return (
-          <div>
+          <div className="stats">
             <h3>Total: {total}</h3>
             <h3>Mean: {mean}</h3>
             <h3>Range: {range}</h3>

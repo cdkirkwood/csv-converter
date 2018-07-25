@@ -1,17 +1,48 @@
 import React from 'react'
+import './Filters.css'
+import FilterButton from './FilterButton'
 
 const Filters = props => {
-  const { data, colIndex, applyIntFilter, applyStrFilter, filterStr, selectedColType, clearFilter, titles } = props
+  const { colIndex, applyIntFilter, applyStrFilter, filterStr, selectedColType, clearFilter, titles } = props
   return selectedColType === 'string' ?
-    <div>
-      <input type="text" name={filterStr} value={filterStr} onChange={applyStrFilter} placeholder={`Search ${titles[colIndex]}`}/>
+    <div className="str-filter">
+      <input type="text"
+        name={filterStr}
+        value={filterStr}
+        onChange={applyStrFilter}
+        placeholder={`Search ${titles[colIndex]}`} />
+      <button
+        name="clear"
+        onClick={clearFilter}>
+        Clear Filter
+      </button>
     </div>
-    : <div>
-      <button name="top25" onClick={applyIntFilter}>Top 25%</button>
-      <button name="bottom25" onClick={applyIntFilter}>Bottom 25%</button>
-      <button name="over100" onClick={applyIntFilter}>Values >= 100</button>
-      <button name="under100" onClick={applyIntFilter}>{'Values < 100'}</button>
-      <button name="clear" onClick={clearFilter}>Clear Filter</button>
+    : <div className="int-filters">
+      <h4>Filters</h4>
+      <FilterButton
+        name="top25"
+        value="Top 25%"
+        applyIntFilter={applyIntFilter}
+      />
+      <FilterButton
+        name="bottom25"
+        value="Bottom 25%"
+        applyIntFilter={applyIntFilter}
+      />
+      <FilterButton
+        name="over100"
+        value="Values >= 100"
+        applyIntFilter={applyIntFilter}
+      />
+      <FilterButton
+        name="under100"
+        value="Values < 100"
+        applyIntFilter={applyIntFilter}
+      />
+      <button name="clear"
+        onClick={clearFilter}>
+        Clear Filter
+      </button>
     </div>
 }
 
