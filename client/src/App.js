@@ -41,6 +41,7 @@ class App extends Component {
 
   sortColumn = (evt, index) => {
     const { fullData, filteredData, selectedColIndex, isFiltered } = this.state
+    //handle edge case where no data meets criteria of filter 
     const data = isFiltered && filteredData.length ? filteredData : fullData
     const colValue = data[0][index]
     //determine data type of selected Column

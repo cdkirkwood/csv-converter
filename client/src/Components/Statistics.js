@@ -15,7 +15,6 @@ export default class Stats extends Component {
       data: [],
       valueOfColum: null
     }
-
   }
 
   componentDidMount() {

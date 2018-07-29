@@ -4,6 +4,12 @@ import FilterButton from './FilterButton'
 
 const Filters = props => {
   const { colIndex, applyIntFilter, applyStrFilter, filterStr, selectedColType, clearFilter, titles } = props
+  const intFilters = [
+    {name: 'top25', value:'Top 25%'}, 
+    {name:'bottom25', value: 'Bottom 25%'},
+    {name:'over100', value:'Values >= 100'},
+    {name: 'under100', value: 'Values < 100'}
+  ]
   return selectedColType === 'string' ?
     <div className="str-filter">
       <input type="text"
@@ -19,26 +25,13 @@ const Filters = props => {
     </div>
     : <div className="int-filters">
       <h4>Filters</h4>
-      <FilterButton
-        name="top25"
-        value="Top 25%"
+      {intFilters.map(filter => (
+        <FilterButton
+        name={filter.name}
+        value={filter.value}
         applyIntFilter={applyIntFilter}
       />
-      <FilterButton
-        name="bottom25"
-        value="Bottom 25%"
-        applyIntFilter={applyIntFilter}
-      />
-      <FilterButton
-        name="over100"
-        value="Values >= 100"
-        applyIntFilter={applyIntFilter}
-      />
-      <FilterButton
-        name="under100"
-        value="Values < 100"
-        applyIntFilter={applyIntFilter}
-      />
+      ))}
       <button name="clear"
         onClick={clearFilter}>
         Clear Filter
