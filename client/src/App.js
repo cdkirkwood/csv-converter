@@ -36,6 +36,7 @@ class App extends Component {
         this.setState({ csvTitles: ['Row', ...data[0]], fullData: rows })
       }
       )
+      .catch(console.error.bind(console))
   }
 
   sortColumn = (evt, index) => {
