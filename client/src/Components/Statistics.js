@@ -23,16 +23,9 @@ export default class Stats extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.colIndex !== this.state.colIndex) {
-      this.calcStats(this.state.data, this.state.colIndex)
+    if (prevProps.colIndex !== this.props.colIndex) {
+      this.calcStats(this.props.data, this.props.colIndex)
     }
-  }
-
-  //if user switches column, we want stats to change
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return nextProps.colIndex !== prevState.colIndex ?
-      { colIndex: nextProps.colIndex }
-      : null
   }
 
   calcStats(data, colIndex) {

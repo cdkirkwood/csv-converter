@@ -98,20 +98,19 @@ class App extends Component {
   }
 
 
-  nextPage = () => {
-    //only go to next page if there is data to display
-    const newIndex = this.state.startIndex + 20
-    if (this.state.isFiltered && newIndex < this.state.filteredData.length) this.setState({ startIndex: newIndex })
-    else if (!this.state.isFiltered && newIndex < this.state.fullData.length) this.setState({ startIndex: newIndex })
+  nextPage = (nextPageIndex) => {
+    this.setState({ startIndex: nextPageIndex })
   }
 
-  previousPage = () => {
-    const newIndex = this.state.startIndex - 20
-    if (newIndex >= 0) this.setState({ startIndex: newIndex })
+  previousPage = (prevPageIndex) => {
+    this.setState({ startIndex: prevPageIndex })
   }
 
   render = () => {
     const { csvTitles, fullData, filterStr, filteredData, startIndex, selectedColIndex, selectedColType, isFiltered, sortType, appliedFilter } = this.state
+    const nextPageIndex = startIndex + 20
+    const prevPageIndex = startIndex - 20
+    const dataLength = isFiltered ? filterData.length : fullData.length
     return fullData.length ? (
       <div className="container">
         <h4>CSV Table</h4>
@@ -141,8 +140,15 @@ class App extends Component {
           appliedFilter={appliedFilter}
         />
         <div className="buttons">
-          <button onClick={this.previousPage}>Previous</button>
-          <button onClick={this.nextPage}>Next</button>
+      {/*only render buttons if there are previous and/or next pages*/}
+          {prevPageIndex >= 0 ?
+            <button onClick={() => this.previousPage(prevPageIndex)}>Previous</button>
+            : null
+          }
+          {nextPageIndex < dataLength ?
+            <button onClick={() => this.nextPage(nextPageIndex)}>Next</button>
+            : null
+          }
         </div>
         <Stats data={fullData} colIndex={selectedColIndex} />
       </div>
