@@ -7,7 +7,7 @@ Csv Table converts any CSV file into an interative table that allows users to ea
 ## Getting Started
 
 1. Fork or clone this repo to your local machine https://github.com/cdkirkwood/csv-converter
-2. run `npm i` to load all needed dependencies
+2. run `npm install-all` to load all needed dependencies
 3. run `npm run dev`
 4. The app should redirect you to http://localhost:3000/ to view the app. If you weren't redirected then you should go the that url manually.
 
